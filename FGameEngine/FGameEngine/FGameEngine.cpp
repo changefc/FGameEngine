@@ -176,45 +176,9 @@ int main()
 	//8、1创建Material
 	Material* material = new Material(shader
 		, glm::vec3(1.0f, 1.0f, 1.0f)
-		, LoadImageToGPU("container2.png", GL_RGB, 0)
-		, glm::vec3(0.0f, 0.5f, 0.0f)
+		, LoadImageToGPU("container2.png", GL_RGBA, 0)
+		, LoadImageToGPU("container2_specular.png", GL_RGBA, 1)
 		, 64);
-
-	//GLuint texture;
-	//glGenTextures(1, &texture);
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, texture);
-	//int widthTex, heightTex, nrChannel;
-	//unsigned char* image = stbi_load("wall.jpg", &widthTex, &heightTex, &nrChannel, 0);
-	//if (image)
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthTex, heightTex, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-	//else
-	//{
-	//	printf("load image fail!");
-	//}
-	//stbi_image_free(image);
-	//glBindTexture(GL_TEXTURE_2D, 0);
-
-	//8.1 渲染第二张图
-	//GLuint textureFace;
-	//glGenTextures(1, &textureFace);
-	//glActiveTexture(GL_TEXTURE1);
-	//glBindTexture(GL_TEXTURE_2D, textureFace);
-	//image = stbi_load("awesomeface.png", &widthTex, &heightTex, &nrChannel, 0);
-	//if (image)
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthTex, heightTex, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-	//else
-	//{
-	//	printf("load image fail!");
-	//}
-	//stbi_image_free(image);
-	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	//8.2设置矩阵变换
 	glm::mat4 trans;
@@ -235,9 +199,6 @@ int main()
 		//检测键盘输入指令
 		glfwPollEvents();
 
-		//3、属性旋转数据
-		//trans = glm::rotate(trans, glm::radians(0.005f), glm::vec3(1, 1, 0));
-
 		//4、渲染
 		//4.1、清屏、清深度缓存
 		glClearColor(0.0f, 0.0f, 0.0f, 1);
@@ -245,52 +206,46 @@ int main()
 
 		//4.2、载入shader程序
 		shader->use();
+		
+		//5.1、输入变换矩阵计算
+		unsigned int transformLoc = glGetUniformLocation(shader->shaderProgram, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
-		//4.3、激活纹理单元并设置纹理
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, texture);
-		//glUniform1i(glGetUniformLocation(shader->shaderProgram, "ourTexture"), 0);
+		//5.2、设置绘制物体坐标及坐标变换，创建摄像机
+		Camera camera(cameraPos, glm::radians(pitch), glm::radians(yaw), cameraUp);
+		cameraFront = camera.Forward;
+		glm::mat4 view = glm::mat4(1.0f);
+		glm::mat4 projection = glm::mat4(1.0f);
+		view = camera.GetViewMatrix();
+		projection = glm::perspective(glm::radians(fov), (float)width / height, 0.1f, 100.0f);
 
-		//glActiveTexture(GL_TEXTURE1);
-		//glBindTexture(GL_TEXTURE_2D, textureFace);
-		//glUniform1i(glGetUniformLocation(shader->shaderProgram, "ourFace"), 1);
+		unsigned int modelMat = glGetUniformLocation(shader->shaderProgram, "modelMat");
+		unsigned int viewMat = glGetUniformLocation(shader->shaderProgram, "viewMat");
+		unsigned int projectMat = glGetUniformLocation(shader->shaderProgram, "projectionMat");
+		glUniformMatrix4fv(viewMat, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projectMat, 1, GL_FALSE, glm::value_ptr(projection));
+
+		shader->SetUniform3f("material.ambient", material->ambient);
+		shader->SetUniformli("material.diffuse", material->diffuse, 0);
+		shader->SetUniformli("material.specular", material->specular, 1);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "material.shininess"), material->shininess);
+
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "objectColor"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.3f, 0.3f, 0.3f);
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightPos"), 10.0f, 10.0f, 10.0f);
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 		//4.3、绘制前绑定VAO draw container
 		glBindVertexArray(VAO);
 
 		for (int i = 0; i < 10; i++)
 		{
-			//5.1、输入变换矩阵计算
-			unsigned int transformLoc = glGetUniformLocation(shader->shaderProgram, "transform");
-			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
-			//5.2、设置绘制物体坐标及坐标变换，创建摄像机
-			Camera camera(cameraPos,glm::radians(pitch), glm::radians(yaw), cameraUp);
-			cameraFront = camera.Forward;
+			//5.2 调整模型位置
 			glm::mat4 model = glm::mat4(1.0f);
-			glm::mat4 view = glm::mat4(1.0f);
-			glm::mat4 projection = glm::mat4(1.0f);
 			model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0, 0));
 			model = glm::translate(model, cubePositions[i]);
-			view = camera.GetViewMatrix();
-			projection = glm::perspective(glm::radians(fov), (float)width / height, 0.1f, 100.0f);
-
-			unsigned int modelMat = glGetUniformLocation(shader->shaderProgram, "modelMat");
-			unsigned int viewMat = glGetUniformLocation(shader->shaderProgram, "viewMat");
-			unsigned int projectMat = glGetUniformLocation(shader->shaderProgram, "projectionMat");
 			glUniformMatrix4fv(modelMat, 1, GL_FALSE, glm::value_ptr(model));
-			glUniformMatrix4fv(viewMat, 1, GL_FALSE, glm::value_ptr(view));
-			glUniformMatrix4fv(projectMat, 1, GL_FALSE, glm::value_ptr(projection));
-			glUniform3f(glGetUniformLocation(shader->shaderProgram, "objectColor"), 1.0f, 0.5f, 0.31f);
-			glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.1f, 0.1f, 0.1f);
-			glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
-			glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightPos"), 10.0f, 10.0f, 10.0f);
-			glUniform3f(glGetUniformLocation(shader->shaderProgram, "viewPos"), cameraPos.x,cameraPos.y,cameraPos.z);
-
-			shader->SetUniform3f("material.ambient", material->ambient);
-			shader->SetUniformli("material.diffuse", material->diffuse,0);
-			shader->SetUniform3f("material.specular", material->specular);
-			glUniform1f(glGetUniformLocation(shader->shaderProgram, "material.shininess"), material->shininess);
 
 			//5.3、绘制
 			glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -365,6 +320,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	fov -= yoffset;
 }
 
+//加载图片数据到CPU
 unsigned int LoadImageToGPU(char* imageName, GLenum type,int index) 
 {
 	stbi_set_flip_vertically_on_load(true);
@@ -376,7 +332,7 @@ unsigned int LoadImageToGPU(char* imageName, GLenum type,int index)
 	unsigned char* image = stbi_load(imageName, &widthTex, &heightTex, &nrChannel, 0);
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthTex, heightTex, 0, type, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, type, widthTex, heightTex, 0, type, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else

@@ -2,7 +2,7 @@
 #include "Material.h"
 
 
-Material::Material(Shader* _shader, glm::vec3 _ambient, unsigned int _diffuse, glm::vec3 _specular, float _shininess)
+Material::Material(Shader* _shader, glm::vec3 _ambient, unsigned int _diffuse, unsigned int _specular, float _shininess)
 {
 	shader = _shader;
 	ambient = _ambient;

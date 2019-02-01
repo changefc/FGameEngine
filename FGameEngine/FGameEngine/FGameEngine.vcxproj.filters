@@ -70,6 +70,9 @@
     <Image Include="wall.jpg">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="container2.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragmentfile.shader" />

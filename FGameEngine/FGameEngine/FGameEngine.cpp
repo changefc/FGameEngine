@@ -27,6 +27,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
+unsigned int LoadImageToGPU(char* imageName, GLenum type, int index);
 
 // camera
 glm::vec3 cameraPos = glm::vec3(-4.8f, 3.5f, 1.4f);
@@ -175,7 +176,7 @@ int main()
 	//8¡¢1´´½¨Material
 	Material* material = new Material(shader
 		, glm::vec3(1.0f, 1.0f, 1.0f)
-		, LoadImageToGPU("wall.jpg", GL_RGB, 0)
+		, LoadImageToGPU("container2.png", GL_RGB, 0)
 		, glm::vec3(0.0f, 0.5f, 0.0f)
 		, 64);
 
@@ -369,8 +370,7 @@ unsigned int LoadImageToGPU(char* imageName, GLenum type,int index)
 	stbi_set_flip_vertically_on_load(true);
 	GLuint texture;
 	glGenTextures(1, &texture);
-	std::cout << GL_TEXTURE0 << '\n';
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0+index);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	int widthTex, heightTex, nrChannel;
 	unsigned char* image = stbi_load(imageName, &widthTex, &heightTex, &nrChannel, 0);

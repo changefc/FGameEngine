@@ -22,6 +22,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "LightDirectional.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -84,6 +85,9 @@ int main()
 
 	//5、创建shader
 	Shader* shader = new Shader("vertexfile.shader", "fragmentfile.shader");
+
+	//5、1 场景灯光
+	LightDirectional lightDirectional = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
 
 	//6、加载模型点面数据
 	float vertices[] = {
@@ -232,8 +236,9 @@ int main()
 
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "objectColor"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.3f, 0.3f, 0.3f);
-		glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(shader->shaderProgram, "lightPos"), 10.0f, 10.0f, 10.0f);
+		shader->SetUniform3f("lightColor", lightDirectional.color);
+		shader->SetUniform3f("lightPos", lightDirectional.position);
+		shader->SetUniform3f("lightdirection", lightDirectional.direction);
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 		//4.3、绘制前绑定VAO draw container

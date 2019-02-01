@@ -9,3 +9,6 @@ FGameEngine/FGameEngine/FGameEngine.cpp
 FGameEngine/FGameEngine.VC.db
 FGameEngine/.vs/FGameEngine/v14/.suo
 FGameEngine/.vs/FGameEngine/v14/.suo
+FGameEngine/FGameEngine/FGameEngine.vcxproj.filters
+FGameEngine/FGameEngine/FGameEngine.vcxproj
+FGameEngine/FGameEngine/FGameEngine.cpp

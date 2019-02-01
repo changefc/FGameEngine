@@ -16,13 +16,14 @@ uniform vec3 objectColor;
 uniform vec3 ambientColor;
 uniform vec3 lightColor;
 uniform vec3 lightPos;
+uniform vec3 lightdirection;
 uniform vec3 viewPos;
 
 void main()
 {
 	//Diffuse£¨Âþ·´Éä£©
 	vec3 norm = normalize(TexNormal);
-	vec3 lightDir = normalize(lightPos-FragPos);
+	vec3 lightDir = normalize(lightdirection);
 	float diff = max(dot(norm,lightDir),0.0);
 	vec3 diffuse = texture(material.diffuse,TexCoord).xyz * diff * lightColor;
 

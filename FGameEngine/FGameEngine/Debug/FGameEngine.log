@@ -1,11 +1,28 @@
-﻿  FGameEngine.cpp
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(178): error C3861: “LoadImageToGPU”: 找不到标识符
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(225): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(318): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(338): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(339): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(343): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(344): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(345): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(346): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-i:\myprojectmain\geta\fgameengine\fgameengine\fgameengine\fgameengine.cpp(364): warning C4244: “-=”: 从“double”转换到“float”，可能丢失数据
+﻿  stdafx.cpp
+  WindowMgr.cpp
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(26): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(46): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(67): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(93): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(94): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(98): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(99): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(100): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(101): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\windowmgr.cpp(128): warning C4244: “-=”: 从“double”转换到“float”，可能丢失数据
+  Shader.cpp
+  Material.cpp
+  FGameEngine.cpp
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(178): error C3861: “LoadImageToGPU”: 找不到标识符
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(225): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(318): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(338): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(339): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(343): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(344): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(345): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(346): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+i:\github\project\fgameengine\fgameengine\fgameengine\fgameengine.cpp(364): warning C4244: “-=”: 从“double”转换到“float”，可能丢失数据
+  DrawScreenMgr.cpp
+  Camera.cpp
+  正在生成代码...

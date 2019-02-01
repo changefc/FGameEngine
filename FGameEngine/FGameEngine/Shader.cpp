@@ -121,7 +121,7 @@ void Shader::SetUniformli(const char* paramName, unsigned int param,int index)
 {
 	if (shaderProgram != NULL)
 	{
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + index);
 		glBindTexture(GL_TEXTURE_2D, param);
 		glUniform1i(glGetUniformLocation(shaderProgram, paramName), index);
 	}

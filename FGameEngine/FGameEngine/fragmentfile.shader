@@ -19,6 +19,11 @@ struct LightPoint{
 };
 uniform LightPoint lightPoint;
 
+struct LightSpot{
+	float cosPhy;
+};
+uniform LightSpot lightSpot;
+
 uniform vec3 objectColor;
 uniform vec3 ambientColor;
 uniform vec3 lightColor;
@@ -47,6 +52,14 @@ void main()
 	vec3 viewVec = normalize(viewPos - FragPos);
 	float specularAmount = pow(max(dot(reflectVec,viewVec),0),material.shininess);
 	vec3 specular = texture(material.specular,TexCoord).xyz * specularAmount * lightColor;
-
-	color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
+	
+	//聚光灯
+	float theta = dot(-lightDir,normalize(-lightdirection));
+	if(theta > lightSpot.cosPhy){
+		color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
+	}else{
+		color = vec4(ambient*objectColor,1.0f);
+	}
+	//平行光、点光源
+	//color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
 };

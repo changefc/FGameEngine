@@ -24,6 +24,7 @@
 #include "Camera.h"
 #include "LightDirectional.h"
 #include "LightPoint.h"
+#include "LightSpot.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -89,7 +90,8 @@ int main()
 
 	//5、1 场景灯光
 	//LightDirectional light = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
-	LightPoint light = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
+	//LightPoint light = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
+	LightSpot light = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(0,0,0), glm::vec3(10, 10, 10),90);
 
 	//6、加载模型点面数据
 	float vertices[] = {
@@ -197,8 +199,8 @@ int main()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		//printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
-		//	cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
+		printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
+			cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
 
 		//2、监听键盘输入数据
 		processInput(window);
@@ -245,6 +247,7 @@ int main()
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.constant"), light.constant);
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.linear"), light.linear);
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.quadratic"), light.quadratic);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosPhy"), light.cosPhy);
 
 		//4.3、绘制前绑定VAO draw container
 		glBindVertexArray(VAO);

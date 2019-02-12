@@ -152,6 +152,7 @@
     <ClInclude Include="DrawScreenMgr.h" />
     <ClInclude Include="LightDirectional.h" />
     <ClInclude Include="LightPoint.h" />
+    <ClInclude Include="LightSpot.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -165,6 +166,7 @@
     <ClCompile Include="FGameEngine.cpp" />
     <ClCompile Include="LightDirectional.cpp" />
     <ClCompile Include="LightPoint.cpp" />
+    <ClCompile Include="LightSpot.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">

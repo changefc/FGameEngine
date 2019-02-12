@@ -12,6 +12,13 @@ struct Material{
 };
 uniform Material material;
 
+struct LightPoint{
+	float constant;
+	float linear;
+	float quadratic;
+};
+uniform LightPoint lightPoint;
+
 uniform vec3 objectColor;
 uniform vec3 ambientColor;
 uniform vec3 lightColor;
@@ -21,9 +28,14 @@ uniform vec3 viewPos;
 
 void main()
 {
+	//计算点光源衰减
+	float dist = length(lightPos - FragPos);
+	float attenuation = 1.0 / (lightPoint.constant + lightPoint.linear*dist + lightPoint.quadratic * dist * dist);
+
 	//Diffuse（漫反射）
 	vec3 norm = normalize(TexNormal);
-	vec3 lightDir = normalize(lightdirection);
+	//vec3 lightDir = normalize(lightdirection);//平行光
+	vec3 lightDir = normalize(lightPos - FragPos);//点光源
 	float diff = max(dot(norm,lightDir),0.0);
 	vec3 diffuse = texture(material.diffuse,TexCoord).xyz * diff * lightColor;
 
@@ -36,5 +48,5 @@ void main()
 	float specularAmount = pow(max(dot(reflectVec,viewVec),0),material.shininess);
 	vec3 specular = texture(material.specular,TexCoord).xyz * specularAmount * lightColor;
 
-	color = vec4((diffuse + ambient + specular)*objectColor,1.0f);
+	color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
 };

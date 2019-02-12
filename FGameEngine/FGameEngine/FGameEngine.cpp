@@ -23,6 +23,7 @@
 
 #include "Camera.h"
 #include "LightDirectional.h"
+#include "LightPoint.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -87,7 +88,8 @@ int main()
 	Shader* shader = new Shader("vertexfile.shader", "fragmentfile.shader");
 
 	//5、1 场景灯光
-	LightDirectional lightDirectional = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
+	//LightDirectional light = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
+	LightPoint light = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
 
 	//6、加载模型点面数据
 	float vertices[] = {
@@ -235,11 +237,14 @@ int main()
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "material.shininess"), material->shininess);
 
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "objectColor"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.3f, 0.3f, 0.3f);
-		shader->SetUniform3f("lightColor", lightDirectional.color);
-		shader->SetUniform3f("lightPos", lightDirectional.position);
-		shader->SetUniform3f("lightdirection", lightDirectional.direction);
+		glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.1f, 0.1f, 0.1f);
+		shader->SetUniform3f("lightColor", light.color);
+		shader->SetUniform3f("lightPos", light.position);
+		shader->SetUniform3f("lightdirection", light.direction);
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.constant"), light.constant);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.linear"), light.linear);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.quadratic"), light.quadratic);
 
 		//4.3、绘制前绑定VAO draw container
 		glBindVertexArray(VAO);

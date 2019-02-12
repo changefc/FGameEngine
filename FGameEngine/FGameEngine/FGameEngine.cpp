@@ -91,7 +91,7 @@ int main()
 	//5、1 场景灯光
 	//LightDirectional light = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
 	//LightPoint light = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
-	LightSpot light = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(0,0,0), glm::vec3(10, 10, 10),90);
+	LightSpot light = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(3,0,0), glm::vec3(1, 1, 1),70,90);
 
 	//6、加载模型点面数据
 	float vertices[] = {
@@ -247,7 +247,8 @@ int main()
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.constant"), light.constant);
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.linear"), light.linear);
 		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.quadratic"), light.quadratic);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosPhy"), light.cosPhy);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosInnerPhy"), light.cosInnerPhy);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosOutterPhy"), light.cosOutterPhy);
 
 		//4.3、绘制前绑定VAO draw container
 		glBindVertexArray(VAO);

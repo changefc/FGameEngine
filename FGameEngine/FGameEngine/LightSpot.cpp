@@ -2,13 +2,15 @@
 #include "LightSpot.h"
 
 
-LightSpot::LightSpot(glm::vec3 _angles, glm::vec3 _position, glm::vec3 _color,float _cutAngle)
+LightSpot::LightSpot(glm::vec3 _angles, glm::vec3 _position, glm::vec3 _color,float _cutInnerAngle, float _cutOutterAngle)
 {
 	position = _position;
 	angles = _angles;
 	color = _color;
-	cutAngle = _cutAngle;
-	cosPhy = glm::cos(glm::radians(cutAngle/2));
+	cutInnerAngle = _cutInnerAngle;
+	cutOutterAngle = _cutOutterAngle;
+	cosInnerPhy	= glm::cos(glm::radians(_cutInnerAngle / 2));
+	cosOutterPhy = glm::cos(glm::radians(_cutOutterAngle / 2));
 
 	constant = 1.0f;
 	linear = 0.09f;

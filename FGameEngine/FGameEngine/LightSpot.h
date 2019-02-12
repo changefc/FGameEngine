@@ -8,7 +8,8 @@
 class LightSpot
 {
 public:
-	LightSpot(glm::vec3 _angles, glm::vec3 _position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f),float _cutAngle = 45.0f);
+	LightSpot(glm::vec3 _angles, glm::vec3 _position = glm::vec3(0.0f, 0.0f, 0.0f), 
+		glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f),float _cutInnerAngle = 70.0f,float _cutOutterAngle = 90.0f);
 	~LightSpot();
 
 	glm::vec3 position;
@@ -20,8 +21,10 @@ public:
 	float linear;
 	float quadratic;
 
-	float cutAngle;
-	float cosPhy;
+	float cutInnerAngle;
+	float cosInnerPhy;
+	float cutOutterAngle;
+	float cosOutterPhy;
 
 	void UpdateDirection();
 };

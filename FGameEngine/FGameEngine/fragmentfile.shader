@@ -20,7 +20,8 @@ struct LightPoint{
 uniform LightPoint lightPoint;
 
 struct LightSpot{
-	float cosPhy;
+	float cosInnerPhy;
+	float cosOutterPhy;
 };
 uniform LightSpot lightSpot;
 
@@ -55,11 +56,16 @@ void main()
 	
 	//聚光灯
 	float theta = dot(-lightDir,normalize(-lightdirection));
-	if(theta > lightSpot.cosPhy){
-		color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
-	}else{
-		color = vec4(ambient*objectColor,1.0f);
+	float spotRatio = 1.0f;
+	if(theta > lightSpot.cosInnerPhy){
+		spotRatio = 1.0f;
 	}
-	//平行光、点光源
-	//color = vec4((ambient + (diffuse +  specular)*attenuation)*objectColor,1.0f);
+	else if(theta > lightSpot.cosOutterPhy){
+		spotRatio = (theta - lightSpot.cosOutterPhy)/(lightSpot.cosInnerPhy - lightSpot.cosOutterPhy);
+	}
+	else{
+		spotRatio = 0.0f;
+	}
+
+	color = vec4((ambient + (diffuse +  specular)*attenuation*spotRatio)*objectColor,1.0f);
 };

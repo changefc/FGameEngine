@@ -89,9 +89,10 @@ int main()
 	Shader* shader = new Shader("vertexfile.shader", "fragmentfile.shader");
 
 	//5、1 场景灯光
-	//LightDirectional light = LightDirectional(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
-	//LightPoint light = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f));
-	LightSpot light = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(3,0,0), glm::vec3(1, 1, 1),70,90);
+	LightDirectional lightDir = LightDirectional(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	LightPoint lightPoint0 = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	LightPoint lightPoint1 = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(6, 0, 0), glm::vec3(1, 1, 1));
+	LightSpot lightSpot = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(3,0,0), glm::vec3(10, 10, 10),70,90);
 
 	//6、加载模型点面数据
 	float vertices[] = {
@@ -199,8 +200,8 @@ int main()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
-			cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
+		//printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
+		//	cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
 
 		//2、监听键盘输入数据
 		processInput(window);
@@ -240,15 +241,43 @@ int main()
 
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "objectColor"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "ambientColor"), 0.1f, 0.1f, 0.1f);
-		shader->SetUniform3f("lightColor", light.color);
-		shader->SetUniform3f("lightPos", light.position);
-		shader->SetUniform3f("lightdirection", light.direction);
 		glUniform3f(glGetUniformLocation(shader->shaderProgram, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.constant"), light.constant);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.linear"), light.linear);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.quadratic"), light.quadratic);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosInnerPhy"), light.cosInnerPhy);
-		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosOutterPhy"), light.cosOutterPhy);
+		
+		//1、平行光
+		shader->SetUniform3f("lightDirection.direction", lightDir.direction);
+		shader->SetUniform3f("lightDirection.color", lightDir.color);
+
+		//2、点光源
+		shader->SetUniform3f("pointLights[0].color", lightPoint0.color);
+		shader->SetUniform3f("pointLights[0].position", lightPoint0.position);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[0].constant"), lightPoint0.constant);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[0].linear"), lightPoint0.linear);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[0].quadratic"), lightPoint0.quadratic);
+
+		shader->SetUniform3f("pointLights[1].color", lightPoint1.color);
+		shader->SetUniform3f("pointLights[1].position", lightPoint1.position);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[1].constant"), lightPoint1.constant);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[1].linear"), lightPoint1.linear);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "pointLights[1].quadratic"), lightPoint1.quadratic);
+
+		//3、聚光灯
+		shader->SetUniform3f("lightSpot.direction", lightSpot.direction);
+		shader->SetUniform3f("lightSpot.color", lightSpot.color);
+		shader->SetUniform3f("lightSpot.position", lightSpot.position);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.constant"), lightSpot.constant);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.linear"), lightSpot.linear);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.quadratic"), lightSpot.quadratic);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosInnerPhy"), lightSpot.cosInnerPhy);
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosOutterPhy"), lightSpot.cosOutterPhy);
+
+		//shader->SetUniform3f("lightColor", light.color);
+		//shader->SetUniform3f("lightPos", light.position);
+		//shader->SetUniform3f("lightdirection", light.direction);
+		//glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.constant"), light.constant);
+		//glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.linear"), light.linear);
+		//glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightPoint.quadratic"), light.quadratic);
+		//glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosInnerPhy"), light.cosInnerPhy);
+		//glUniform1f(glGetUniformLocation(shader->shaderProgram, "lightSpot.cosOutterPhy"), light.cosOutterPhy);
 
 		//4.3、绘制前绑定VAO draw container
 		glBindVertexArray(VAO);

@@ -99,4 +99,7 @@
     <Text Include="fragmentfile.shader" />
     <Text Include="vertexfile.shader" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>

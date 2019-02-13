@@ -89,10 +89,10 @@ int main()
 	Shader* shader = new Shader("vertexfile.shader", "fragmentfile.shader");
 
 	//5、1 场景灯光
-	LightDirectional lightDir = LightDirectional(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	LightPoint lightPoint0 = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(0, 10, 0));
-	LightPoint lightPoint1 = LightPoint(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(6, 0, 0), glm::vec3(10, 0, 0));
-	LightSpot lightSpot = LightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(3,0,0), glm::vec3(10, 10, 10),70,90);
+	LightDirectional lightDir (glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	LightPoint lightPoint0 (glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(0, 10, 0));
+	LightPoint lightPoint1 (glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(6, 0, 0), glm::vec3(10, 0, 0));
+	LightSpot lightSpot (glm::vec3(glm::radians(90.0f), 0.0f, 0.0f),glm::vec3(3,0,0), glm::vec3(10, 10, 10),70,90);
 
 	//6、加载模型点面数据
 	float vertices[] = {

@@ -127,9 +127,9 @@ vec3 CalcSpotLight(LightSpot light,vec3 norm,vec3 viewVec,vec3 fragPos){
 	if(theta > light.cosInnerPhy){
 		spotRatio = 1.0f;
 	}
-	//else if(theta > light.cosOutterPhy){
-	//	spotRatio = (theta - light.cosOutterPhy)/(light.cosInnerPhy - light.cosOutterPhy);
-	//}
+	else if(theta > light.cosOutterPhy){
+		spotRatio = (theta - light.cosOutterPhy)/(light.cosInnerPhy - light.cosOutterPhy);
+	}
 	else{
 		spotRatio = 0.0f;
 	}

@@ -87,7 +87,7 @@ vec3 CalcPointLight(LightPoint light,vec3 norm,vec3 viewVec,vec3 fragPos){
 	float attenuation = 1.0 / (light.constant + light.linear*dist + light.quadratic * dist * dist);
 
 	//Diffuse（漫反射）
-	vec3 lightDir = viewVec;//点光源
+	vec3 lightDir = normalize(light.position - fragPos);//点光源
 	float diff = max(dot(norm,lightDir),0.0);
 	vec3 diffuse = texture(material.diffuse,TexCoord).xyz * diff * light.color;
 
@@ -109,7 +109,7 @@ vec3 CalcSpotLight(LightSpot light,vec3 norm,vec3 viewVec,vec3 fragPos){
 	float attenuation = 1.0 / (light.constant + light.linear*dist + light.quadratic * dist * dist);
 
 	//Diffuse（漫反射）
-	vec3 lightDir = viewVec;//点光源
+	vec3 lightDir = normalize(light.position - fragPos);//点光源
 	float diff = max(dot(norm,lightDir),0.0);
 	vec3 diffuse = texture(material.diffuse,TexCoord).xyz * diff * light.color;
 
@@ -127,9 +127,9 @@ vec3 CalcSpotLight(LightSpot light,vec3 norm,vec3 viewVec,vec3 fragPos){
 	if(theta > light.cosInnerPhy){
 		spotRatio = 1.0f;
 	}
-	else if(theta > light.cosOutterPhy){
-		spotRatio = (theta - light.cosOutterPhy)/(light.cosInnerPhy - light.cosOutterPhy);
-	}
+	//else if(theta > light.cosOutterPhy){
+	//	spotRatio = (theta - light.cosOutterPhy)/(light.cosInnerPhy - light.cosOutterPhy);
+	//}
 	else{
 		spotRatio = 0.0f;
 	}

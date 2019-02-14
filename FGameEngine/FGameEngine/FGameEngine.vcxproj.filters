@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="资源文件\nanosuit">
+      <UniqueIdentifier>{9c8653ae-2008-4080-8ff6-832ff8b41f1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,6 +51,12 @@
     <ClInclude Include="LightSpot.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -80,6 +89,12 @@
     <ClCompile Include="LightSpot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png">
@@ -94,6 +109,57 @@
     <Image Include="container2_specular.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="nanosuit\arm_dif.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\arm_showroom_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\arm_showroom_spec.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\body_dif.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\body_showroom_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\body_showroom_spec.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\glass_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\glass_dif.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\hand_dif.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\hand_showroom_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\hand_showroom_spec.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\helmet_diff.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\helmet_showroom_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\helmet_showroom_spec.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\leg_dif.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\leg_showroom_ddn.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
+    <Image Include="nanosuit\leg_showroom_spec.png">
+      <Filter>资源文件\nanosuit</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragmentfile.shader" />
@@ -101,5 +167,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="nanosuit\nanosuit.blend">
+      <Filter>资源文件\nanosuit</Filter>
+    </None>
+    <None Include="nanosuit\nanosuit.mtl">
+      <Filter>资源文件\nanosuit</Filter>
+    </None>
   </ItemGroup>
 </Project>

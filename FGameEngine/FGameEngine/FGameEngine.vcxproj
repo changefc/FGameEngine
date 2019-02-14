@@ -121,6 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,6 +155,8 @@
     <ClInclude Include="LightPoint.h" />
     <ClInclude Include="LightSpot.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stdafx.h" />
@@ -168,6 +171,8 @@
     <ClCompile Include="LightPoint.cpp" />
     <ClCompile Include="LightSpot.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -181,6 +186,23 @@
     <Image Include="awesomeface.png" />
     <Image Include="container2.png" />
     <Image Include="container2_specular.png" />
+    <Image Include="nanosuit\arm_dif.png" />
+    <Image Include="nanosuit\arm_showroom_ddn.png" />
+    <Image Include="nanosuit\arm_showroom_spec.png" />
+    <Image Include="nanosuit\body_dif.png" />
+    <Image Include="nanosuit\body_showroom_ddn.png" />
+    <Image Include="nanosuit\body_showroom_spec.png" />
+    <Image Include="nanosuit\glass_ddn.png" />
+    <Image Include="nanosuit\glass_dif.png" />
+    <Image Include="nanosuit\hand_dif.png" />
+    <Image Include="nanosuit\hand_showroom_ddn.png" />
+    <Image Include="nanosuit\hand_showroom_spec.png" />
+    <Image Include="nanosuit\helmet_diff.png" />
+    <Image Include="nanosuit\helmet_showroom_ddn.png" />
+    <Image Include="nanosuit\helmet_showroom_spec.png" />
+    <Image Include="nanosuit\leg_dif.png" />
+    <Image Include="nanosuit\leg_showroom_ddn.png" />
+    <Image Include="nanosuit\leg_showroom_spec.png" />
     <Image Include="wall.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +210,8 @@
     <Text Include="vertexfile.shader" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="nanosuit\nanosuit.blend" />
+    <None Include="nanosuit\nanosuit.mtl" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

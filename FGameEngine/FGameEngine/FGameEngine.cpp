@@ -53,8 +53,8 @@ int DrawNanosuit(std::string pathexe);
 
 int main(int arga, char* argv[])
 {
-	DrawBox();
-	//DrawNanosuit(argv[0]);
+	//DrawBox();
+	DrawNanosuit(argv[0]);
 	return 0;
 }
 
@@ -445,6 +445,9 @@ int DrawNanosuit(std::string pathexe)
 		model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0, 0));
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(modelMat, 1, GL_FALSE, glm::value_ptr(model));
+
+		shader->SetUniform3f("material.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniform1f(glGetUniformLocation(shader->shaderProgram, "material.shininess"), 64);
 
 		modelNan.Draw(shader);
 

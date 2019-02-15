@@ -25,7 +25,7 @@ void Model::loadModel(std::string path)
 
 void Model::processNode(aiNode * node, const aiScene * scene)
 {
-	std::cout << node->mName.data << endl;
+	//std::cout << node->mName.data << endl;
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
@@ -106,6 +106,7 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType type, std::string typeName)
 {
 	vector<Texture> textures;
+	//std::cout << "loadMaterialTextures:" << type << endl;
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
@@ -135,9 +136,9 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma)
 {
 	string filename = string(path);
+	//std::cout << "TextureFromFile:" << filename << endl;
 	filename = directory + '/' + filename;
-	std::cout << "TextureFromFile:" << filename << endl;
-
+	
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
 

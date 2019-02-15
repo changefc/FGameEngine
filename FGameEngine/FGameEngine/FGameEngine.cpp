@@ -53,8 +53,8 @@ int DrawNanosuit(std::string pathexe);
 
 int main(int arga, char* argv[])
 {
-	//DrawBox();
-	DrawNanosuit(argv[0]);
+	DrawBox();
+	//DrawNanosuit(argv[0]);
 	return 0;
 }
 
@@ -183,10 +183,10 @@ int DrawBox()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
@@ -349,7 +349,7 @@ int DrawNanosuit(std::string pathexe)
 	glViewport(0, 0, width, height);
 
 	//5、创建shader
-	Shader* shader = new Shader("vertexfile.shader", "fragmentfile.shader");
+	Shader* shader = new Shader("vertexfile_model.shader", "fragmentfile_model.shader");
 
 	//5、1 场景灯光
 	LightDirectional lightDir(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -375,8 +375,8 @@ int DrawNanosuit(std::string pathexe)
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
-			cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
+		//printf("Camer Pos X:%.1f  Y:%.1f  Z:%.1f  pitch:%.1f  yaw:%.1f pitchR:%.1f  yawR:%.1f Fov:%.1f \n",
+			//cameraPos.x, cameraPos.y, cameraPos.z, pitch, yaw, glm::radians(pitch), glm::radians(yaw),fov);
 
 		//2、监听键盘输入数据
 		processInput(window);

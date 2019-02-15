@@ -11,7 +11,6 @@ Material::Material(Shader* _shader, glm::vec3 _ambient, unsigned int _diffuse, u
 	shininess = _shininess;
 }
 
-
 Material::~Material()
 {
 }

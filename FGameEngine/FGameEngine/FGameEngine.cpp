@@ -353,9 +353,9 @@ int DrawNanosuit(std::string pathexe)
 
 	//5、1 场景灯光
 	LightDirectional lightDir(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	LightPoint lightPoint0(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(0, 10, 0));
-	LightPoint lightPoint1(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(6, 0, 0), glm::vec3(10, 0, 0));
-	LightSpot lightSpot(glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(3, 0, 0), glm::vec3(10, 10, 10), 70, 90);
+	LightPoint lightPoint0(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(-6, 0, 20), glm::vec3(10, 10, 0));
+	LightPoint lightPoint1(glm::vec3(glm::radians(45.0f), 0.0f, 0.0f), glm::vec3(6, 0, 20), glm::vec3(10, 0, 10));
+	LightSpot lightSpot(glm::vec3(glm::radians(180.0f), 0.0f, 0.0f), glm::vec3(3, 20, 10), glm::vec3(10, 10, 10), 70, 90);
 
 	//加载模型
 	std::string pathPro = pathexe;
@@ -385,7 +385,7 @@ int DrawNanosuit(std::string pathexe)
 
 		//4、渲染
 		//4.1、清屏、清深度缓存
-		glClearColor(0.3f, 0.3f, 0.3f, 1);
+		glClearColor(0.0f, 0.0f, 0.0f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//4.2、载入shader程序
